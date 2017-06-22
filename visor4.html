@@ -67,7 +67,40 @@ border: solid 3px red;
 
 			map.addLayers([layerGoogleHibrido, layerGoogleSatelital, layerGoogleTerrain, layerGoogleTerrain]);
 
-			// CONTROL de cambio de capas
+
+			// capa stamen
+			var layerStamen=new OpenLayers.Layer.Stamen("toner");
+			map.addLayer(layerStamen);
+
+			// capa MapBox
+			var mapboxLayer = new OpenLayers.Layer.XYZ('MapBox', [
+
+		    	"http://b.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png",
+        		"http://c.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png",
+        		"http://d.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png"
+		    	], {
+        		sphericalMercator: true,
+        		//tileSize: new OpenLayers.Size([512, 512]),
+       			 wrapDateLine: true,
+    			numZoomLevels: 19
+	    	});
+
+	    	map.addLayer(mapboxLayer);
+
+			// utilizando servicio WMS
+	     	var departamentos_wms = new OpenLayers.Layer.WMS(
+	        	"Sub-Cuencas de Bolivia",
+            	"http://geo.gob.bo/geoserver/wms",
+            	{layers: 'subcuencas'},
+            	{isBaselayer: false, 
+             	transparent: true
+            	});
+
+	     	map.addLayer(departamentos_wms);
+
+
+
+	     	// CONTROL DE CAMBIO DE CAPAS
 			var controlCapas = new OpenLayers.Control.LayerSwitcher();
 			map.addControl(controlCapas);
 
@@ -80,24 +113,6 @@ border: solid 3px red;
 			map.addControl(controlOverview);
 
             map.zoomToMaxExtent();  // para mostrar el mapa completo
-
-
-			// capa stamen
-			var layerStamen=new OpenLayers.Layer.Stamen("toner");
-			map.addLayer(layerStamen);
-
-			// capa mapbox
-			var mapboxLayer = new OpenLayers.Layer.XYZ('MapBox', [
-		    	"http://b.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png",
-        		"http://c.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png",
-        		"http://d.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png"
-		    	], {
-        		sphericalMercator: true,
-        		//tileSize: new OpenLayers.Size([512, 512]),
-        		wrapDateLine: true,
-    			numZoomLevels: 19
-    			});
-			map.addLayer(mapbox);
 
 			
 		}
