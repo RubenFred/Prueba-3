@@ -71,7 +71,15 @@ border: solid 3px red;
 			var controlCapas = new OpenLayers.Control.LayerSwitcher();
 			map.addControl(controlCapas);
 
+			// control de posicion del cursor
+			var controlCursor = new OpenLayers.Control.MousePosition();
+			map.addControl(controlCursor);
 
+			// control ventana pequeña emergente
+			var controlOverview = new OpenLayers.Control.OverviewMap();
+			map.addControl(controlOverview);
+
+            map.zoomToMaxExtent();  // para mostrar el mapa completo
 
 
 			// capa stamen
@@ -80,20 +88,18 @@ border: solid 3px red;
 
 			// capa mapbox
 			var mapboxLayer = new OpenLayers.Layer.XYZ('MapBox', [
-
-		    "http://b.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png",
-        	"http://c.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png",
-        	"http://d.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png"
-		    ], {
-        sphericalMercator: true,
-        //tileSize: new OpenLayers.Size([512, 512]),
-        wrapDateLine: true,
-    	numZoomLevels: 19
-    });
+		    	"http://b.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png",
+        		"http://c.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png",
+        		"http://d.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png"
+		    	], {
+        		sphericalMercator: true,
+        		//tileSize: new OpenLayers.Size([512, 512]),
+        		wrapDateLine: true,
+    			numZoomLevels: 19
+    			});
 			map.addLayer(mapbox);
 
-
-
+			
 		}
 
 		// cargamos la funcion init para desplegar el mapa
